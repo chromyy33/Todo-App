@@ -219,6 +219,7 @@ button > svg {
 /* Task Item */
 .task-item-checkbox {
   width: 2.4rem;
+  height: 2.4rem;
   aspect-ratio: 1;
   appearance: none;
   -webkit-appearance: none;
