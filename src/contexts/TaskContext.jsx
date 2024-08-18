@@ -26,19 +26,36 @@ function TaskProvider({ children }) {
     return filteredData || { tasksDate: today, taskList: [] };
   });
 
+  // useEffect(() => {
+  //   const handleBeforeUnload = () => {
+  //     localStorage.setItem("allTaskData", JSON.stringify(allTaskData));
+  //   };
+
+  //   // Listen for the beforeunload event to store state
+  //   window.addEventListener("beforeunload", handleBeforeUnload);
+
+  //   return () => {
+  //     // Clean up the event listener on component unmount
+  //     window.removeEventListener("beforeunload", handleBeforeUnload);
+  //   };
+  // }, [allTaskData]);
   useEffect(() => {
-    const handleBeforeUnload = () => {
+    const handleBeforeUnload = (event) => {
       localStorage.setItem("allTaskData", JSON.stringify(allTaskData));
+  
+      // Optionally add a message before the page reloads
+      event.preventDefault();
+      event.returnValue = '';
     };
-
-    // Listen for the beforeunload event to store state
+  
+    // Listen for the beforeunload event
     window.addEventListener("beforeunload", handleBeforeUnload);
-
+  
     return () => {
-      // Clean up the event listener on component unmount
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [allTaskData]);
+  
   const [hour, setHour] = useState(() => {
     const currentHour = new Date().getHours();
     // Convert 24-hour format to 12-hour format
