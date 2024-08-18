@@ -66,7 +66,6 @@ li {
   min-width: 35rem;
   width: 88%;
   max-width: 60rem;
-  height: 85%;
   background: var(--color-bg);
   border-radius: var(--border-radius);
   font-size: 1.6rem;
@@ -401,6 +400,7 @@ button > svg {
 .no-task-wrapper {
   height: 50%;
   gap: 2rem;
+  padding-bottom: 4rem;
 }
 .no-task-heading {
   color: var(--color-text);
@@ -408,7 +408,7 @@ button > svg {
 }
 .no-task {
 
-  width: 60% ;
+  width: 50% ;
   
   object-fit: cover;
   opacity: 0.95;
