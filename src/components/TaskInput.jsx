@@ -64,6 +64,7 @@ function TaskInput() {
     toast.success("Task Added", { ...toastStyle });
     setTask("");
     inputVal.current.blur();
+
   }
 
   // Function to handle pressing the "Enter" key to add the task

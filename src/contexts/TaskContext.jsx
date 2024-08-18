@@ -26,21 +26,13 @@ function TaskProvider({ children }) {
     return filteredData || { tasksDate: today, taskList: [] };
   });
 
+
   useEffect(() => {
-    const handleBeforeUnload = () => {
-      // Prompt the user to confirm before reload/exit
-      const shouldSave = window.confirm("Do you want to reload?");
-
-      localStorage.setItem("allTaskData", JSON.stringify(allTaskData));
-    };
-
-    window.addEventListener("beforeunload", handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
-    };
-  }, [allTaskData]);
-
+    // Save data to localStorage whenever allTaskData changes
+    localStorage.setItem("allTaskData", JSON.stringify(allTaskData));
+  }, [allTaskData]); // Dependency array to trigger the effect when allTaskData changes
+  
+  
   const [hour, setHour] = useState(() => {
     const currentHour = new Date().getHours();
     // Convert 24-hour format to 12-hour format
