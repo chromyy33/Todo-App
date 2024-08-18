@@ -26,36 +26,30 @@ function TaskProvider({ children }) {
     return filteredData || { tasksDate: today, taskList: [] };
   });
 
-  // useEffect(() => {
-  //   const handleBeforeUnload = () => {
-  //     localStorage.setItem("allTaskData", JSON.stringify(allTaskData));
-  //   };
-
-  //   // Listen for the beforeunload event to store state
-  //   window.addEventListener("beforeunload", handleBeforeUnload);
-
-  //   return () => {
-  //     // Clean up the event listener on component unmount
-  //     window.removeEventListener("beforeunload", handleBeforeUnload);
-  //   };
-  // }, [allTaskData]);
   useEffect(() => {
-    const handlePageReload = () => {
-      const entries = performance.getEntriesByType("navigation");
-  
-      // Check if the page was reloaded
-      if (entries.length > 0 && entries[0].type === "reload") {
+    const handleBeforeUnload = (event) => {
+      // Prompt the user to confirm before reload/exit
+      const shouldSave = window.confirm("Do you want to save your tasks?");
+      
+      if (shouldSave) {
         localStorage.setItem("allTaskData", JSON.stringify(allTaskData));
-        console.log("Page was reloaded, data saved to localStorage");
+        console.log("Data saved to localStorage");
+      } else {
+        console.log("Changes were not saved");
       }
+  
+      // Prevent the default unload behavior and show a prompt (optional)
+      event.preventDefault();
+      event.returnValue = ''; // This is necessary for some browsers to show a dialog
     };
   
-    handlePageReload(); // Call it once when the component mounts
+    window.addEventListener("beforeunload", handleBeforeUnload);
   
     return () => {
-      // No event listeners needed for `performance` API
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [allTaskData]);
+  
   
   const [hour, setHour] = useState(() => {
     const currentHour = new Date().getHours();
