@@ -40,19 +40,20 @@ function TaskProvider({ children }) {
   //   };
   // }, [allTaskData]);
   useEffect(() => {
-    const handleBeforeUnload = (event) => {
-      localStorage.setItem("allTaskData", JSON.stringify(allTaskData));
+    const handlePageReload = () => {
+      const entries = performance.getEntriesByType("navigation");
   
-      // Optionally add a message before the page reloads
-      event.preventDefault();
-      event.returnValue = '';
+      // Check if the page was reloaded
+      if (entries.length > 0 && entries[0].type === "reload") {
+        localStorage.setItem("allTaskData", JSON.stringify(allTaskData));
+        console.log("Page was reloaded, data saved to localStorage");
+      }
     };
   
-    // Listen for the beforeunload event
-    window.addEventListener("beforeunload", handleBeforeUnload);
+    handlePageReload(); // Call it once when the component mounts
   
     return () => {
-      window.removeEventListener("beforeunload", handleBeforeUnload);
+      // No event listeners needed for `performance` API
     };
   }, [allTaskData]);
   
