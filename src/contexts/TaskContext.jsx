@@ -27,30 +27,20 @@ function TaskProvider({ children }) {
   });
 
   useEffect(() => {
-    const handleBeforeUnload = (event) => {
+    const handleBeforeUnload = () => {
       // Prompt the user to confirm before reload/exit
-      const shouldSave = window.confirm("Do you want to save your tasks?");
-      
-      if (shouldSave) {
-        localStorage.setItem("allTaskData", JSON.stringify(allTaskData));
-        console.log("Data saved to localStorage");
-      } else {
-        console.log("Changes were not saved");
-      }
-  
-      // Prevent the default unload behavior and show a prompt (optional)
-      event.preventDefault();
-      event.returnValue = ''; // This is necessary for some browsers to show a dialog
+      const shouldSave = window.confirm("Do you want to reload?");
+
+      localStorage.setItem("allTaskData", JSON.stringify(allTaskData));
     };
-  
+
     window.addEventListener("beforeunload", handleBeforeUnload);
-  
+
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
   }, [allTaskData]);
-  
-  
+
   const [hour, setHour] = useState(() => {
     const currentHour = new Date().getHours();
     // Convert 24-hour format to 12-hour format
