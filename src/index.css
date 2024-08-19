@@ -64,7 +64,10 @@ li {
   position: relative;
   color: var(--color-heading);
   min-width: 35rem;
-  width: 88%;
+  min-height: 67rem;
+  height: 85%;
+  max-height: 78rem;
+  width: 92%;
   max-width: 60rem;
   background: var(--color-bg);
   border-radius: var(--border-radius);
@@ -134,7 +137,7 @@ button > svg {
   margin: 6rem auto;
   margin-bottom: 2rem;
   gap: 1rem;
-  width: 78%;
+  width: 84%;
   height: 5.2rem;
 }
 .task-input-container {
@@ -200,7 +203,7 @@ button > svg {
 .task-list-container {
   margin: 0 auto;
   margin-top: 2.4rem;
-  width: 78%;
+  width: 84%;
   gap: 2.4rem;
 }
 .pinned-task-container {
@@ -233,6 +236,7 @@ button > svg {
 .task-item-checkbox::before {
   content: "";
   width: 2rem;
+  height: 1.4rem;
   aspect-ratio: 1;
   margin: 0.2rem;
   margin-top: 0.4rem;
@@ -268,7 +272,7 @@ button > svg {
 }
 .task-item-icon {
   position: absolute;
-  left: -8.5%;
+  left: -7%;
   top: -3px;
   width: 2rem;
   aspect-ratio: 1;
@@ -390,7 +394,7 @@ button > svg {
 /* Carry Over Btn */
 .carryover {
   gap: 1rem;
-  width: 78%;
+  width: 84%;
   margin: 0 auto;
   margin-bottom: 2rem;
 }
@@ -407,9 +411,10 @@ button > svg {
   font-size: 1.6rem;
 }
 .no-task {
+  max-width: 45%;
+  width: 40rem;
+  min-width: 22rem;
 
-  width: 50% ;
-  
   object-fit: cover;
   opacity: 0.95;
 }
